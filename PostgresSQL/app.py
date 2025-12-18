@@ -23,7 +23,7 @@ Base.metadata.create_all(bind=engine)
 def home():
     return JSONResponse(
         status_code=200,
-        content={"message": "Welcome to Insurance Premium Prediction API"}
+        content={"message": "Welcome to Insurance Premium Prediction API Service which uses PostgreSQL for logging!"}
     )
 
 
