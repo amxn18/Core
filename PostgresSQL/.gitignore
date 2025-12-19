@@ -2,3 +2,4 @@
 .env.docker
 .vscode
 __pycache__
+.env.cloud
