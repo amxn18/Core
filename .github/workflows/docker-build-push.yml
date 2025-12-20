@@ -21,7 +21,7 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t amxn18/ml-prediction-api-with-logging:latest ./PostgresSQL
+          docker build -t amxn18/ml-prediction-api-with-logging:latest .
 
       - name: Push Docker image
         run: |
