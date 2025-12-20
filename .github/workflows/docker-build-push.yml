@@ -10,21 +10,27 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # Checkout code from GitHub
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      # Login to Docker Hub using GitHub Secrets
       - name: Login to Docker Hub
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
+      # Build Docker image (Dockerfile is inside PostgresSQL/)
       - name: Build Docker image
         run: |
           docker build \
+            -f PostgresSQL/Dockerfile \
             -t ${{ secrets.DOCKERHUB_USERNAME }}/ml-prediction-api-with-logging:latest \
-            ./PostgresSQL
+            -t ${{ secrets.DOCKERHUB_USERNAME }}/ml-prediction-api-with-logging:${{ github.sha }} \
+            PostgresSQL
 
+      # Push both tags to Docker Hub
       - name: Push Docker image
         run: |
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/ml-prediction-api-with-logging:latest
