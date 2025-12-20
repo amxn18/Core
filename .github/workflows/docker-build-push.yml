@@ -26,4 +26,6 @@ jobs:
             ./PostgresSQL
 
       - name: Push Docker image
-        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/ml-prediction-api-with-logging:latest
+        run: |
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/ml-prediction-api-with-logging:latest
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/ml-prediction-api-with-logging:${{ github.sha }}
