@@ -1,4 +1,4 @@
-name: Build and Push Docker Image
+name: Docker Build and Push
 
 on:
   push:
@@ -21,8 +21,9 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t amxn18/ml-prediction-api-with-logging:latest .
+          docker build \
+            -t ${{ secrets.DOCKERHUB_USERNAME }}/ml-prediction-api-with-logging:latest \
+            ./PostgresSQL
 
       - name: Push Docker image
-        run: |
-          docker push amxn18/ml-prediction-api-with-logging:latest
+        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/ml-prediction-api-with-logging:latest
